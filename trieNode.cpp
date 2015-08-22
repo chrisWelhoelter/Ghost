@@ -49,7 +49,7 @@ bool TrieNode::isEntry(std::string entry){
 }
 
 void TrieNode::buildMoveMap(){
-    
+        
     for (size_t i = 0; i < 26; i++){
         if (nextLetters[i] != nullptr){
             if (nextLetters[i]->isEndOfWord == true){
@@ -60,8 +60,7 @@ void TrieNode::buildMoveMap(){
             nextLetters[i]->buildMoveMap();
             
             if (!nextLetters[i]->moves.losingMovesWithDepth.empty()
-                && nextLetters[i]->moves.winningMovesWithDepth.empty()
-                && nextLetters[i]->moves.otherMoves.empty())
+                && nextLetters[i]->moves.winningMovesWithDepth.empty())
             {
                 size_t minDepth = -1; // max size_t
                 for (size_t j = 0; j < nextLetters[i]->moves.losingMovesWithDepth.size(); j++){
@@ -71,10 +70,7 @@ void TrieNode::buildMoveMap(){
                 }
                 moves.winningMovesWithDepth.push_back(std::make_pair(i, minDepth + 1));
             }
-            else if (nextLetters[i]->moves.losingMovesWithDepth.empty()
-                     && !nextLetters[i]->moves.winningMovesWithDepth.empty()
-                     && nextLetters[i]->moves.otherMoves.empty())
-            {
+            else {
                 size_t minDepth = -1; // max size_t
                 for (size_t j = 0; j < nextLetters[i]->moves.winningMovesWithDepth.size(); j++){
                     if (nextLetters[i]->moves.winningMovesWithDepth[j].second < minDepth){
@@ -82,10 +78,6 @@ void TrieNode::buildMoveMap(){
                     }
                 }
                 moves.losingMovesWithDepth.push_back(std::make_pair(i, minDepth + 1));
-            }
-            else {
-                // should rank other moves by win/lose ratio !!!
-                moves.otherMoves.push_back(i);
             }
         }
     }

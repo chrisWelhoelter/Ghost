@@ -17,7 +17,7 @@
 struct MoveMap{
     std::vector<std::pair<size_t, size_t>> winningMovesWithDepth;
     std::vector<std::pair<size_t, size_t>> losingMovesWithDepth;
-    std::vector<size_t> otherMoves;
+    //std::vector<size_t> otherMoves;
 };
 
 class TrieNode{

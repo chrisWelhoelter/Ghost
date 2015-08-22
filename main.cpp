@@ -55,17 +55,13 @@ int main(int argc, const char * argv[]) {
     
     workingWord += playerMove;
     
+    srand(time(NULL));
+    
     while (!gameOver){
         
         if (!dictionary.getNode(workingWord).moves.winningMovesWithDepth.empty()){
             size_t randomWinningIndex = rand() % dictionary.getNode(workingWord).moves.winningMovesWithDepth.size();
             compMove = dictionary.getNode(workingWord).moves.winningMovesWithDepth[randomWinningIndex].first + 'a';
-            workingWord += compMove;
-        }
-        
-        else if (!dictionary.getNode(workingWord).moves.otherMoves.empty()){
-            size_t randomOtherIndex = rand() % dictionary.getNode(workingWord).moves.otherMoves.size();
-            compMove = dictionary.getNode(workingWord).moves.otherMoves[randomOtherIndex] + 'a'; // this could be chosen relative to win/lose ratio
             workingWord += compMove;
         }
         
